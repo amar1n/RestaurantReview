@@ -17,17 +17,17 @@ export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 - npm install --save @react-native-community/async-storage
 - npm install --save react-native-gesture-handler
 - react-native link
-- 25.mp4
+- [Change the Splash Screen for iOS Apps built with React Native](https://egghead.io/lessons/react-native-change-the-splash-screen-for-ios-apps-built-with-react-native)
 - uninstall del iPhone
 - react-native run-ios
-- 26.mp4
+- [Change the Splash Screen for Android Apps built with React Native](https://egghead.io/lessons/react-native-change-the-splash-screen-for-android-apps-built-with-react-native)
 - uninstall del Android
 - react-native run-android
-- 27.mp4
+- [Change the App Icon for React Native Apps on iOS](https://egghead.io/lessons/react-native-change-the-app-icon-for-react-native-apps-on-ios)
 - uninstall del iPhone
 - react-native run-ios
-- 28.mp4
+- [Change the App Icon for React Native Apps on Android](https://egghead.io/lessons/react-native-change-the-app-icon-for-react-native-apps-on-android)
 - uninstall del Android
 - react-native run-android
-- 29.mp4
-- 30.mp4
+- [Run a React Native App on an iOS Device](https://egghead.io/lessons/react-native-run-a-react-native-app-on-an-ios-device)
+- [Run a React Native App on an Android Device](https://egghead.io/lessons/react-native-run-a-react-native-app-on-an-android-device)
