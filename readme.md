@@ -1,3 +1,5 @@
+# RestaurantReview
+
 - react-native init RestaurantReview
 - react-native run-ios
 - Go to your react-native Project then go to android directory Create a file with this name local.properties
