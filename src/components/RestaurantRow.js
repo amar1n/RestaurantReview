@@ -4,57 +4,81 @@ import {
   View,
   StyleSheet,
   TouchableHighlight,
-  Image
+  Image,
+  Alert
 } from "react-native";
 import Stars from "components/Stars";
 import { withNavigation } from "react-navigation";
+import Swipeout from "react-native-swipeout";
 
 class RestaurantRow extends Component {
-  state = {
-    showInfo: false
-  };
   infoPressed = () => {
-    //this.setState({ showInfo: !this.state.showInfo });
     this.props.navigation.navigate("Info", { place: this.props.place });
   };
 
   render() {
     const { place, index } = this.props;
 
+    const swipeSettings = {
+      autoClose: true,
+      onClose: (secId, rowId, direction) => {},
+      onOpen: (secId, rowId, direction) => {},
+      left: [
+        {
+          onPress: () => {
+            Alert.alert(
+              "Alert",
+              "Are you sure you want to delete?",
+              [
+                {
+                  text: "No",
+                  onPress: () => console.log("Cancel pressed"),
+                  style: "cancel"
+                },
+                {
+                  text: "Yes",
+                  onPress: () => {
+                    console.log("Delete pressed");
+                    this.props.onDeleteRestaurant(place);
+                  }
+                }
+              ],
+              { cancelable: true }
+            );
+          },
+          text: "Delete",
+          type: "delete"
+        }
+      ],
+      rowId: this.props.index,
+      sectionId: 1
+    };
+
     return (
-      <View
-        style={{ backgroundColor: index % 2 === 0 ? "white" : "#F3F3F7" }}
-        key={place.title}
-      >
-        <View style={styles.row}>
-          <View style={styles.stars}>
-            <Stars rating={place.id} />
-          </View>
-          <View style={styles.nameAddress}>
-            <Text>{place.title}</Text>
-          </View>
-          <View style={styles.edges}>
-            <TouchableHighlight
-              onPress={this.infoPressed}
-              style={styles.button}
-              underlayColor="#5398DC"
-            >
-              <Text style={styles.buttonText}>Info</Text>
-            </TouchableHighlight>
+      <Swipeout {...swipeSettings}>
+        <View
+          style={{ backgroundColor: index % 2 === 0 ? "white" : "#F3F3F7" }}
+          key={place.title}
+        >
+          <View style={styles.row}>
+            <View style={styles.stars}>
+              <Stars rating={place.id} />
+            </View>
+            <View style={styles.nameAddress}>
+              <Text>{place.title}</Text>
+            </View>
+            <View style={styles.edges}>
+              <TouchableHighlight
+                onPress={this.infoPressed}
+                style={styles.button}
+                underlayColor="#5398DC"
+              >
+                <Text style={styles.buttonText}>Info</Text>
+              </TouchableHighlight>
+            </View>
           </View>
         </View>
-
-        {this.state.showInfo && (
-          <View style={styles.info}>
-            <Text>Restaurant Info</Text>
-            <Image
-              source={{ uri: place.thumbnailUrl }}
-              style={{ flex: 1, height: 100 }}
-              resizeMode="contain"
-            />
-          </View>
-        )}
-      </View>
+      </Swipeout>
     );
   }
 }

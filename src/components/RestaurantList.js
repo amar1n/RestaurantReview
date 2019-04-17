@@ -6,13 +6,19 @@ import PizzaImage from "images/pizza.png";
 import axios from "axios";
 
 export default class RestaurantList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      search: null,
+      restaurants: [],
+      restaurantsDeleted: []
+    };
+
+    this.handleDeleteRestaurant = this.handleDeleteRestaurant.bind(this);
+  }
+
   static navigationOptions = {
     header: null
-  };
-
-  state = {
-    search: null,
-    restaurants: []
   };
 
   componentDidMount() {
@@ -48,13 +54,25 @@ export default class RestaurantList extends Component {
               place={item}
               index={index}
               navigate={this.props.navigation}
+              onDeleteRestaurant={this.handleDeleteRestaurant}
             />
           )}
           keyExtractor={item => item.title}
-          initialNumToRender={15}
+          initialNumToRender={1}
+          windowSize={1}
+          maxToRenderPerBatch={1}
         />
       </View>
     );
+  }
+
+  handleDeleteRestaurant(place) {
+    const restaurantsDeleted = this.state.restaurantsDeleted.concat(place);
+    restaurants = this.state.restaurants.filter(
+      el => !restaurantsDeleted.includes(el)
+    );
+
+    this.setState({ restaurants, restaurantsDeleted });
   }
 }
 
